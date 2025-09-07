@@ -1,0 +1,28 @@
+import example.*
+
+describe "mensajero" {
+  test "1. El paquete de George que no está pago no puede ser llevado por Neo a la matrix." {
+    neo.credito(true)
+    assert.notThat(paquete.puedeLlegar(neo, matrix))
+  }
+  
+  test "2. El paquete de George que sí está pago puede ser llevado por Jean a la matrix" {
+    paquete.estaPago(true)
+    assert.that(paquete.puedeLlegar(jeanGray, matrix))
+  }
+  
+  test "3. El paquete de George que sí está pago no puede ser llevado por Sara (que pesa 70kg) a Brooklyn si es que utiliza un camión con un acoplado ." {
+    paquete.estaPago(true)
+    saraConnor.peso(70)
+    saraConnor.vehiculo(camion)
+    camion.cantidadAcoplados(1)
+    assert.notThat(paquete.puedeLlegar(saraConnor, brooklyn))
+  }
+  
+  test "4. La entrega anterior puede hacerse si Sara usa una moto" {
+    paquete.estaPago(true)
+    saraConnor.peso(70)
+    saraConnor.vehiculo(moto)
+    assert.that(paquete.puedeLlegar(saraConnor, brooklyn))
+  }
+}
